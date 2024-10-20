@@ -20,7 +20,6 @@ class _TenantDetailScreenState extends State<TenantDetailScreen> {
     tenant = ModalRoute.of(context)!.settings.arguments as Tenant;
   }
 
-  // ignore: non_constant_identifier_names
   void _PaymentStatus(int month) {
     setState(() {
       // Marking the payment status

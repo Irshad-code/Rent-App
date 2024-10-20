@@ -6,23 +6,21 @@ import 'models/tenant.dart';
 class TenantOverviewScreen extends StatefulWidget {
   const TenantOverviewScreen({super.key});
 
-
-  //  TenantOverviewScreen({super.key});
-
   @override
   State<TenantOverviewScreen> createState() => _TenantOverviewScreenState();
 }
 
 class _TenantOverviewScreenState extends State<TenantOverviewScreen> {
-   List<Tenant> tenants = [
+  List<Tenant> tenants = [
     Tenant(number: 1, name: 'John Doe', rent: 500.0, dueAmount: 200.0),
     Tenant(number: 2, name: 'Jane Smith', rent: 600.0, dueAmount: 0.0, isPaid: true),
     // Add more tenants as needed
   ];
-   List<Tenant> filteredTenants = [];
+  
+  List<Tenant> filteredTenants = [];
   String searchQuery = '';
 
-    @override
+  @override
   void initState() {
     super.initState();
     filteredTenants = tenants; // Initially show all tenants
@@ -66,12 +64,39 @@ class _TenantOverviewScreenState extends State<TenantOverviewScreen> {
                         final tenant = filteredTenants[index];
                         return ListTile(
                           title: Text(tenant.name),
-                          subtitle: Text('Rent Amount: \$${tenant.rent.toStringAsFixed(2)}'),
-                          onTap: (){
-                                                        // Navigate to TenantDetailScreen when tapped
-                             Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                             const TenantDetailScreen(),
-                             settings: RouteSettings(arguments: tenant)));
+                          subtitle: RichText(
+                            text: TextSpan(
+                              style: const TextStyle(
+                                fontSize: 16, // Default font size for both parts
+                                color: Colors.black, // Default color for the label
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: 'Rent Amount: ',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.normal, // Normal weight for the label
+                                    color: Colors.black, // Color for the label
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: '\$${tenant.rent.toStringAsFixed(2)}', // Rent amount
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold, // Bold weight for the amount
+                                    color: Colors.green, // Green color for the amount
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            // Navigate to TenantDetailScreen when tapped
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const TenantDetailScreen(),
+                                settings: RouteSettings(arguments: tenant),
+                              ),
+                            );
                           },
                         );
                       },
