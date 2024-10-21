@@ -27,32 +27,45 @@ class _TenantDetailScreenState extends State<TenantDetailScreen> {
     });
   }
 
+  void _navigateToEdit() async {
+    final updatedTenant = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EditTenantScreen(tenant: tenant),
+      ),
+    );
+
+    if (updatedTenant != null) {
+      setState(() {
+        tenant = updatedTenant; // Update the tenant with new details
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tenant Details'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.edit),
+            onPressed: _navigateToEdit, // Navigate to Edit screen
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between text and button
               children: [
                 Text('Name: ${tenant.name}', style: const TextStyle(fontSize: 20)),
                 IconButton(
                   icon: const Icon(Icons.edit),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditTenantScreen(tenant: tenant), // Pass tenant details to edit screen
-                      ),
-                    );
-                  },
+                  onPressed: _navigateToEdit, // Navigate to Edit screen
                 ),
               ],
             ),

@@ -1,8 +1,8 @@
 // lib/models/tenant.dart
 class Tenant {
   final int number;
-  final String name;
-  final double rent;
+  String name;
+  double rent;
   double dueAmount;
   bool isPaid;
   List<bool> paymentStatus;

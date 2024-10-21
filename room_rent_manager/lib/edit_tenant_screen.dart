@@ -30,11 +30,14 @@ class _EditTenantScreenState extends State<EditTenantScreen> {
     super.dispose();
   }
 
-  void _saveChanges() {
-    // Logic to save changes (e.g., update the tenant object)
-    // You might want to pass back updated values to TenantDetailScreen
-    Navigator.pop(context); // Go back after saving
-  }
+void _saveChanges() {
+  // Update tenant details
+  widget.tenant.name = nameController.text;
+  widget.tenant.rent = double.tryParse(rentController.text) ?? widget.tenant.rent;
+
+  // Pass back updated tenant object
+  Navigator.pop(context, widget.tenant); // Pass updated tenant
+}
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'welcome_screen.dart';
 import 'tenant_overview_screen.dart';
 import 'tenant_detail_screen.dart';
-// import 'edit_tenant_screen.dart';
+
 
 void main() {
  runApp(const MyApp());
